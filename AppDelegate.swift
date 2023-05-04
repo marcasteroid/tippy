@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  Tippy
 //
-//  Created by Marco on 04/05/23.
+//  Created by Marco Margarucci on 04/05/23.
 //
 
 import UIKit
