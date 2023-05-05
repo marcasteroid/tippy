@@ -19,7 +19,7 @@ final class TitleView: UIView {
     }
     
     private func setupLayout() {
-        self.backgroundColor = .orange
+        self.backgroundColor = ThemeColor.secondary10
     }
     
     

@@ -23,7 +23,8 @@ class CalculatorViewController: UIViewController {
             resultView,
             billInputView,
             tipInputView,
-            splitInputView
+            splitInputView,
+            UIView()
         ])
         stackView.axis = .vertical
         stackView.spacing = 40
@@ -36,7 +37,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func configureUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = ThemeColor.background
         view.addSubview(verticalStackView)
         
         let views = [titleView, resultView, billInputView, tipInputView, splitInputView]
