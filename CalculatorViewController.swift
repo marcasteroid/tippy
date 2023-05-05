@@ -39,6 +39,8 @@ class CalculatorViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(verticalStackView)
         
+        let views = [titleView, resultView, billInputView, tipInputView, splitInputView]
+        
         verticalStackView.snp.makeConstraints { make in
             make.top.equalTo(view.snp.topMargin).offset(16)
             make.leading.equalTo(view.snp.leadingMargin).offset(16)
@@ -46,24 +48,23 @@ class CalculatorViewController: UIViewController {
             make.bottom.equalTo(view.snp.bottomMargin).offset(5)
         }
         
-        titleView.snp.makeConstraints { make in
-            make.height.equalTo(50)
-        }
-        
-        resultView.snp.makeConstraints { make in
-            make.height.equalTo(225)
-        }
-        
-        billInputView.snp.makeConstraints { make in
-            make.height.equalTo(60)
-        }
-        
-        tipInputView.snp.makeConstraints { make in
-            make.height.equalTo(56+56+16)
-        }
-        
-        splitInputView.snp.makeConstraints { make in
-            make.height.equalTo(56)
+        for (index, view) in views.enumerated() {
+            view.snp.makeConstraints { make in
+                switch index {
+                case 0:
+                    make.height.equalTo(50)
+                case 1:
+                    make.height.equalTo(225)
+                case 2:
+                    make.height.equalTo(60)
+                case 3:
+                    make.height.equalTo(56+56+16)
+                case 4:
+                    make.height.equalTo(56)
+                default:
+                    break
+                }
+            }
         }
     }
 }
