@@ -31,11 +31,13 @@ class CalculatorViewController: UIViewController {
         return stackView
     }()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
     }
     
+    // MARK: - Functions
     private func configureUI() {
         view.backgroundColor = ThemeColor.background
         view.addSubview(verticalStackView)

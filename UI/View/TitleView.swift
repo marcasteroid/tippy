@@ -9,6 +9,13 @@ import UIKit
 
 final class TitleView: UIView {
     
+    // MARK: - Views
+    private let label: UILabel = {
+        LabelFactory.build(text: StringConstants.TitleViewConstants.title,
+                           font: ThemeFont.demiBold(ofSize: 22))
+    }()
+    
+    // MARK: - Functions
     init() {
         super.init(frame: .zero)
         setupLayout()
@@ -19,7 +26,13 @@ final class TitleView: UIView {
     }
     
     private func setupLayout() {
-        self.backgroundColor = ThemeColor.secondary10
+        self.backgroundColor = ThemeColor.background
+        addSubview(label)
+        label.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalToSuperview()
+        }
     }
     
     
