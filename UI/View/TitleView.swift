@@ -12,7 +12,7 @@ final class TitleView: UIView {
     // MARK: - Views
     private let label: UILabel = {
         LabelFactory.build(text: StringConstants.TitleViewConstants.title,
-                           font: ThemeFont.demiBold(ofSize: 22))
+                           font: ThemeFont.bold(ofSize: 35))
     }()
     
     // MARK: - Functions

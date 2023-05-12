@@ -45,9 +45,11 @@ final class ResultView: UIView {
     
     private lazy var horizontalStackView: UIView = {
         let stackView = UIStackView(arrangedSubviews: [
-            AmountView(),
+            AmountView(title: StringConstants.AmountView.totalBillTitle,
+                       textAlignment: .center),
             UIView(),
-            AmountView()
+            AmountView(title: StringConstants.AmountView.totalTipTitle,
+                       textAlignment: .center),
         ])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -81,21 +83,5 @@ final class ResultView: UIView {
         }
         
         addShadow(offset: CGSize(width: 0, height: 10), color: .black, radius: 10, opacity: 0.2)
-    }
-}
-
-class AmountView: UIView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupLayout() {
-        backgroundColor = .red
     }
 }

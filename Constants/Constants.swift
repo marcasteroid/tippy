@@ -17,4 +17,11 @@ struct StringConstants {
     struct ResultViewConstants {
         static let title: String = "Total per person"
     }
+    
+    // MARK: - Amount view
+    struct AmountView {
+        static let totalBillTitle: String = "Total bill"
+        static let totalTipTitle: String = "Total tip"
+        static let amountLabelPlaceholder: String = "0€"
+    }
 }
