@@ -18,7 +18,7 @@ final class ResultView: UIView {
     private let amountPerPersonLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        let text = NSMutableAttributedString(string: "0 €", attributes: [ .font: ThemeFont.bold(ofSize: 24)])
+        let text = NSMutableAttributedString(string: StringConstants.AmountView.amountLabelPlaceholder, attributes: [ .font: ThemeFont.bold(ofSize: 24)])
         text.addAttributes([.font: ThemeFont.bold(ofSize: 38)], range: NSMakeRange(0, 1))
         label.attributedText = text
         label.textColor = .white
