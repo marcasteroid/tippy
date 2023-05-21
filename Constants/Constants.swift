@@ -38,11 +38,13 @@ struct StringConstants {
     
     struct BillView {
         static let doneButtonTitle: String = "Done"
+        static let headerLabelText: String = "Enter your bill"
     }
     
-    // MARK: - Header view
+    // MARK: - Tip input view
     
-    struct HeaderView {
-        static let headerLabelText: String = "Enter your bill"
+    struct TipInputView {
+        static let headerLabelText: String = "Choose your tip"
+        static let customTipButtonTitle: String = "Custom tip"
     }
 }

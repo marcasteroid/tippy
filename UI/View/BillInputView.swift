@@ -13,7 +13,7 @@ final class BillInputView: UIView {
     
     private let headerView: HeaderView = {
         let view = HeaderView()
-        view.configure(text: StringConstants.HeaderView.headerLabelText)
+        view.configure(text: StringConstants.BillView.headerLabelText)
         return view
     }()
     
@@ -26,7 +26,7 @@ final class BillInputView: UIView {
     
     private lazy var currencyLabel: UILabel = {
         let label = LabelFactory.build(text: StringConstants.Global.currency,
-                                       font: ThemeFont.bold(ofSize: 24))
+                                       font: ThemeFont.bold(ofSize: 22))
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
@@ -36,7 +36,7 @@ final class BillInputView: UIView {
         textField.tintColor = ThemeColor.secondary10
         textField.textColor = ThemeColor.text
         textField.borderStyle = .none
-        textField.font = ThemeFont.demiBold(ofSize: 28)
+        textField.font = ThemeFont.demiBold(ofSize: 22)
         textField.keyboardType = .decimalPad
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         // Toolbar
@@ -102,35 +102,5 @@ final class BillInputView: UIView {
     
     @objc private func doneButtonTapped() {
         textField.endEditing(true)
-    }
-}
-
-final class HeaderView: UIView {
-    
-    // MARK: - Views
-    
-    private lazy var titleLabel: UILabel = {
-        LabelFactory.build(text: nil,
-                           font: ThemeFont.bold(ofSize: 14))
-    }()
-    
-    init() {
-        super.init(frame: .zero)
-        setupLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupLayout() {
-        addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-    }
-    
-    func configure(text: String) {
-        titleLabel.text = text
     }
 }
