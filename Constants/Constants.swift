@@ -39,4 +39,10 @@ struct StringConstants {
     struct BillView {
         static let doneButtonTitle: String = "Done"
     }
+    
+    // MARK: - Header view
+    
+    struct HeaderView {
+        static let headerLabelText: String = "Enter your bill"
+    }
 }

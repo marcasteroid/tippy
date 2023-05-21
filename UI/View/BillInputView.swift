@@ -12,7 +12,9 @@ final class BillInputView: UIView {
     // MARK: - Views
     
     private let headerView: HeaderView = {
-        return HeaderView()
+        let view = HeaderView()
+        view.configure(text: StringConstants.HeaderView.headerLabelText)
+        return view
     }()
     
     private lazy var textFieldContainerView: UIView = {
@@ -73,9 +75,9 @@ final class BillInputView: UIView {
         headerView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
-            make.width.equalTo(68)
+            make.width.equalTo(100)
             make.height.equalTo(20)
-            make.bottom.equalTo(textFieldContainerView.snp.top)
+            make.bottom.equalTo(textFieldContainerView.snp.top).offset(-2)
         }
         
         textFieldContainerView.snp.makeConstraints { make in
@@ -105,6 +107,13 @@ final class BillInputView: UIView {
 
 final class HeaderView: UIView {
     
+    // MARK: - Views
+    
+    private lazy var titleLabel: UILabel = {
+        LabelFactory.build(text: nil,
+                           font: ThemeFont.bold(ofSize: 14))
+    }()
+    
     init() {
         super.init(frame: .zero)
         setupLayout()
@@ -115,6 +124,13 @@ final class HeaderView: UIView {
     }
     
     private func setupLayout() {
-        self.backgroundColor = .green
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func configure(text: String) {
+        titleLabel.text = text
     }
 }
