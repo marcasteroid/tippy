@@ -47,4 +47,10 @@ struct StringConstants {
         static let headerLabelText: String = "Choose your tip"
         static let customTipButtonTitle: String = "Custom tip"
     }
+    
+    // MARK: - Split input view
+    
+    struct SplitInputView {
+        static let headerLabelText: String = "Split the total"
+    }
 }

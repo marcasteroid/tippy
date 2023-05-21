@@ -12,7 +12,8 @@ struct ButtonFactory {
                       font: UIFont?,
                       backgroundColor: UIColor = .clear,
                       textColor: UIColor = ThemeColor.text,
-                      cornerRadius: CGFloat?) -> UIButton {
+                      cornerRadius: CGFloat?,
+                      corners: CACornerMask? = nil) -> UIButton {
         let button = UIButton()
         button.setTitle(text, for: .normal)
         button.titleLabel?.font = font
@@ -21,6 +22,10 @@ struct ButtonFactory {
         
         if let cornerRadius = cornerRadius {
             button.addCornerRadius(radius: cornerRadius)
+        }
+        
+        if let corners = corners, let cornerRadius = cornerRadius {
+            button.addRoundedCorners(corners: corners, radius: cornerRadius)
         }
         
         return button
