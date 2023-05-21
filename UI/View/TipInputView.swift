@@ -6,8 +6,20 @@
 //
 
 import UIKit
+import Combine
+import CombineCocoa
 
 final class TipInputView: UIView {
+    
+    // MARK: - Properties
+    
+    private let tipSubject = CurrentValueSubject<Tip, Never>(.none)
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    public var valuePublisher: AnyPublisher<Tip, Never> {
+        return tipSubject.eraseToAnyPublisher()
+    }
     
     // MARK: - View
     
@@ -17,33 +29,48 @@ final class TipInputView: UIView {
         return view
     }()
     
-    private let tenPercentTipButton: UIButton = {
+    private lazy var tenPercentTipButton: UIButton = {
         let tip = Tip.tenPercent
         let button = ButtonFactory.build(attributedText: tip.stringValue,
                             font: ThemeFont.demiBold(ofSize: 18),
                             backgroundColor: ThemeColor.primary,
                             textColor: .white,
                             cornerRadius: 8)
+        button.tapPublisher.flatMap({
+            Just(tip)
+        })
+        .assign(to: \.value, on: tipSubject)
+        .store(in: &cancellables)
         return button
     }()
     
-    private let fiftenPercentTipButton: UIButton = {
+    private lazy var fiftenPercentTipButton: UIButton = {
         let tip = Tip.fifteenPercent
         let button = ButtonFactory.build(attributedText: tip.stringValue,
                             font: ThemeFont.demiBold(ofSize: 18),
                             backgroundColor: ThemeColor.primary,
                             textColor: .white,
                             cornerRadius: 8)
+        button.tapPublisher.flatMap({
+            Just(tip)
+        })
+        .assign(to: \.value, on: tipSubject)
+        .store(in: &cancellables)
         return button
     }()
     
-    private let twentyPercentTipButton: UIButton = {
+    private lazy var twentyPercentTipButton: UIButton = {
         let tip = Tip.twentyPercent
         let button = ButtonFactory.build(attributedText: tip.stringValue,
                             font: ThemeFont.demiBold(ofSize: 18),
                             backgroundColor: ThemeColor.primary,
                             textColor: .white,
                             cornerRadius: 8)
+        button.tapPublisher.flatMap({
+            Just(tip)
+        })
+        .assign(to: \.value, on: tipSubject)
+        .store(in: &cancellables)
         return button
     }()
     

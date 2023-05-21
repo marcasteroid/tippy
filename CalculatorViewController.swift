@@ -7,8 +7,13 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 class CalculatorViewController: UIViewController {
+    
+    // MARK: - Properties
+    private let calculatorViewModel = CalculatorViewModel()
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Views
     private let titleView = TitleView()
@@ -35,6 +40,17 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        bind()
+    }
+    
+    private func bind() {
+        let input = CalculatorViewModel.Input(billPublisher: billInputView.valuePublisher,
+                                              tipPublisher: tipInputView.valuePublisher,
+                                              splitPublisher: Just(5).eraseToAnyPublisher())
+        let output = calculatorViewModel.transform(input: input)
+        
+        output.updateViewPublisher.sink { result in
+        }.store(in: &cancellables)
     }
     
     // MARK: - Functions
@@ -59,11 +75,11 @@ class CalculatorViewController: UIViewController {
                 case 1:
                     make.height.equalTo(225)
                 case 2:
-                    make.height.equalTo(60)
+                    make.height.equalTo(65)
                 case 3:
-                    make.height.equalTo(56+56+16)
+                    make.height.equalTo(132)
                 case 4:
-                    make.height.equalTo(56)
+                    make.height.equalTo(65)
                 default:
                     break
                 }

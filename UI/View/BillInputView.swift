@@ -6,8 +6,19 @@
 //
 
 import UIKit
+import Combine
+import CombineCocoa
 
 final class BillInputView: UIView {
+    
+    // MARK: - Properties
+    private var cancellables = Set<AnyCancellable>()
+    
+    private let billSubject: PassthroughSubject<Double, Never> = .init()
+    
+    var valuePublisher: AnyPublisher<Double, Never> {
+        return billSubject.eraseToAnyPublisher()
+    }
     
     // MARK: - Views
     
@@ -26,7 +37,7 @@ final class BillInputView: UIView {
     
     private lazy var currencyLabel: UILabel = {
         let label = LabelFactory.build(text: StringConstants.Global.currency,
-                                       font: ThemeFont.bold(ofSize: 22))
+                                       font: ThemeFont.bold(ofSize: 15))
         label.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         return label
     }()
@@ -36,7 +47,7 @@ final class BillInputView: UIView {
         textField.tintColor = ThemeColor.secondary10
         textField.textColor = ThemeColor.text
         textField.borderStyle = .none
-        textField.font = ThemeFont.demiBold(ofSize: 22)
+        textField.font = ThemeFont.demiBold(ofSize: 18)
         textField.keyboardType = .decimalPad
         textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         // Toolbar
@@ -63,6 +74,7 @@ final class BillInputView: UIView {
     init() {
         super.init(frame: .zero)
         setupLayout()
+        observe()
     }
     
     required init?(coder: NSCoder) {
@@ -97,7 +109,14 @@ final class BillInputView: UIView {
             make.top.equalToSuperview()
             make.leading.equalTo(currencyLabel.snp.trailing).offset(16)
             make.trailing.equalTo(textFieldContainerView.snp.trailing).offset(-16)
+            make.centerY.equalTo(currencyLabel)
         }
+    }
+    
+    private func observe() {
+        textField.textPublisher.sink { [unowned self] text in
+            billSubject.send(text?.doubleValue ?? 0)
+        }.store(in: &cancellables)
     }
     
     @objc private func doneButtonTapped() {
