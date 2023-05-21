@@ -28,7 +28,7 @@ final class TipInputView: UIView {
     }()
     
     private let fiftenPercentTipButton: UIButton = {
-        let tip = Tip.fiftenPercent
+        let tip = Tip.fifteenPercent
         let button = ButtonFactory.build(attributedText: tip.stringValue,
                             font: ThemeFont.demiBold(ofSize: 18),
                             backgroundColor: ThemeColor.primary,
